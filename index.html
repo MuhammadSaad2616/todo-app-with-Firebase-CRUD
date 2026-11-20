@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>To-do list</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <!-- LOGIN / SIGN UP -->
+    <section id="auth" hidden>
+      <h1>To-do list</h1>
+      <p class="sub">Login karo ya naya account banao.</p>
+      <form id="authForm">
+        <input type="email" id="email" placeholder="Email" autocomplete="email" required aria-label="Email">
+        <input type="password" id="password" placeholder="Password (kam az kam 6 characters)" autocomplete="current-password" required aria-label="Password">
+        <div class="row">
+          <button class="add" type="submit" id="loginBtn">Login</button>
+          <button class="btn edit" type="button" id="signupBtn">Sign up</button>
+        </div>
+      </form>
+      <p class="status err" id="authMsg"></p>
+    </section>
+
+    <!-- TODO APP -->
+    <section id="app" hidden>
+      <div class="top">
+        <h1>To-do list</h1>
+        <button class="btn" type="button" id="logoutBtn">Logout</button>
+      </div>
+      <p class="sub" id="who"></p>
+      <p class="status" id="status"></p>
+      <form id="form">
+        <input type="text" id="text" placeholder="What needs doing?" maxlength="200" autocomplete="off" aria-label="New task">
+        <button class="add" type="submit">Add</button>
+      </form>
+      <ul id="list"></ul>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

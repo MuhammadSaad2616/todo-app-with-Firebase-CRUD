@@ -1,0 +1,39 @@
+:root{
+  --bg:#eef3f1; --surface:#fff; --text:#1d2a27; --muted:#6a7b76;
+  --line:#d3dedb; --accent:#1f7a68; --accent-text:#fff; --danger:#b3372f;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#121a18; --surface:#1b2623; --text:#e6f0ed; --muted:#8fa39d;
+    --line:#2c3a36; --accent:#4cc3a8; --accent-text:#0c1a16; --danger:#ff8a80;
+    color-scheme: dark;
+  }
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none !important}
+body{margin:0; background:var(--bg); color:var(--text); font-family:"Segoe UI",system-ui,sans-serif; font-size:17px; line-height:1.4}
+main{max-width:520px; margin:0 auto; padding:28px 16px 48px}
+h1{font-size:1.9rem; margin:0 0 4px}
+.top{display:flex; align-items:center; justify-content:space-between; gap:12px}
+.sub{color:var(--muted); margin:0 0 16px; word-break:break-all}
+.status{color:var(--muted); margin:0 0 16px; min-height:1.4em}
+.status.err{color:var(--danger)}
+form{display:flex; gap:8px; margin-bottom:18px}
+#authForm{flex-direction:column; margin-bottom:8px}
+.row{display:flex; gap:8px}
+.row button{flex:1; padding:12px 18px}
+input[type=text],input[type=email],input[type=password]{flex:1; min-width:0; padding:12px 14px; font:inherit; color:var(--text); background:var(--surface); border:1.5px solid var(--line); border-radius:10px}
+button{font:inherit; cursor:pointer; border:0; border-radius:10px}
+.add{background:var(--accent); color:var(--accent-text); padding:0 18px; font-weight:700}
+:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px}
+li{display:flex; align-items:center; gap:10px; padding:12px; background:var(--surface); border:1.5px solid var(--line); border-radius:10px}
+li input[type=checkbox]{width:22px; height:22px; accent-color:var(--accent); flex:none}
+li input[type=text]{padding:6px 10px}
+li span{flex:1; word-break:break-word}
+li.done span{text-decoration:line-through; color:var(--muted)}
+.btn{background:transparent; color:var(--text); padding:6px 10px; font-weight:700; border:1.5px solid var(--line)}
+.edit{color:var(--accent)}
+.del{color:var(--danger)}
+.empty{color:var(--muted); text-align:center; padding:28px 0}
