@@ -1,32 +1,57 @@
+*,*::before,*::after{box-sizing:border-box}
 :root{
-  --bg:#eef3f1; --surface:#fff; --text:#1d2a27; --muted:#6a7b76;
-  --line:#d3dedb; --accent:#1f7a68; --accent-text:#fff; --danger:#b3372f;
+  --a:#16a34a; --b:#84cc16; --bg:#effaf0; --card:#ffffff; --line:#cfe8d3;
+  --text:#17301f; --muted:#6b8a73; --danger:#d6383f;
+  --shadow:0 10px 24px rgba(22,163,74,.18);
   color-scheme: light;
 }
-@media (prefers-color-scheme: dark){
-  :root{
-    --bg:#121a18; --surface:#1b2623; --text:#e6f0ed; --muted:#8fa39d;
-    --line:#2c3a36; --accent:#4cc3a8; --accent-text:#0c1a16; --danger:#ff8a80;
-    color-scheme: dark;
-  }
-}
-*,*::before,*::after{box-sizing:border-box}
-body{margin:0; background:var(--bg); color:var(--text); font-family:"Segoe UI",system-ui,sans-serif; font-size:17px; line-height:1.4}
-main{max-width:520px; margin:0 auto; padding:28px 16px 48px}
-h1{font-size:1.9rem; margin:0 0 4px}
-.status{color:var(--muted); margin:0 0 20px; min-height:1.4em}
+body{margin:0; min-height:100vh; color:var(--text); background:var(--bg); font-family:"Poppins","Segoe UI",system-ui,sans-serif; font-size:16px; line-height:1.4; overflow-x:hidden}
+.blob{position:fixed; border-radius:50%; filter:blur(70px); opacity:.35; z-index:0; animation:float 14s ease-in-out infinite alternate}
+.b1{width:340px; height:340px; background:var(--a); top:-90px; left:-80px}
+.b2{width:300px; height:300px; background:var(--b); bottom:-80px; right:-60px; animation-delay:-6s}
+@keyframes float{to{transform:translate(60px,50px) scale(1.15)}}
+main{position:relative; z-index:1; max-width:520px; margin:0 auto; padding:30px 16px 70px}
+h1{margin:0 0 14px; font-family:"Fredoka","Poppins",system-ui,sans-serif; font-size:2.5rem; font-weight:700; letter-spacing:.3px}
+.prog{height:10px; border-radius:99px; background:var(--line); overflow:hidden}
+.prog i{display:block; height:100%; width:0; border-radius:99px; background:linear-gradient(90deg,var(--a),var(--b)); transition:width .6s cubic-bezier(.2,.9,.3,1.2)}
+.status{margin:8px 0 18px; color:var(--muted); font-weight:600; min-height:1.4em}
 .status.err{color:var(--danger)}
-form{display:flex; gap:8px; margin-bottom:18px}
-input[type=text]{flex:1; min-width:0; padding:12px 14px; font:inherit; color:var(--text); background:var(--surface); border:1.5px solid var(--line); border-radius:10px}
-button{font:inherit; cursor:pointer; border:0; border-radius:10px}
-.add{background:var(--accent); color:var(--accent-text); padding:0 18px; font-weight:700}
-ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px}
-li{display:flex; align-items:center; gap:10px; padding:12px; background:var(--surface); border:1.5px solid var(--line); border-radius:10px}
-li input[type=checkbox]{width:22px; height:22px; accent-color:var(--accent); flex:none}
-li input[type=text]{padding:6px 10px}
-li span{flex:1; word-break:break-word}
-li.done span{text-decoration:line-through; color:var(--muted)}
-.btn{background:transparent; padding:6px 10px; font-weight:700; border:1.5px solid var(--line)}
-.edit{color:var(--accent)}
-.del{color:var(--danger)}
-.empty{color:var(--muted); text-align:center; padding:28px 0}
+form{display:flex; gap:10px; margin-bottom:20px}
+input[type=text]{flex:1; min-width:0; font:inherit; color:var(--text); padding:13px 16px; background:var(--card); border:1.5px solid var(--line); border-radius:16px; outline:none; transition:.25s; box-shadow:var(--shadow)}
+input[type=text]::placeholder{color:var(--muted)}
+input[type=text]:focus{border-color:var(--a); box-shadow:0 0 0 4px rgba(22,163,74,.22)}
+button{font:inherit; cursor:pointer; border:0}
+.add{position:relative; overflow:hidden; padding:0 22px; border-radius:16px; font-weight:700; color:#fff; background:linear-gradient(135deg,var(--a),var(--b)); box-shadow:0 8px 20px rgba(22,163,74,.35); transition:transform .15s, box-shadow .2s}
+.add::after{content:""; position:absolute; top:0; left:-70%; width:50%; height:100%; background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent); transform:skewX(-20deg); animation:shine 3.2s infinite}
+@keyframes shine{0%,55%{left:-70%} 100%{left:130%}}
+.add:hover{transform:translateY(-2px); box-shadow:0 12px 26px rgba(22,163,74,.45)}
+.add:active{transform:scale(.93)}
+ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px}
+li{display:flex; align-items:center; gap:12px; padding:12px 12px 12px 14px; background:var(--card); border:1.5px solid var(--line); border-radius:18px; box-shadow:var(--shadow); transition:transform .2s, box-shadow .2s}
+li:hover{transform:translateY(-3px) scale(1.01)}
+li.new{animation:in .5s cubic-bezier(.2,.9,.3,1.3) both}
+li.out{animation:out .35s ease forwards}
+@keyframes in{from{opacity:0; transform:translateX(-30px) scale(.9)} to{opacity:1; transform:none}}
+@keyframes out{to{opacity:0; transform:translateX(70px) scale(.85)}}
+li span{flex:1; word-break:break-word; transition:color .3s}
+li.done span{color:var(--muted); text-decoration:line-through; text-decoration-thickness:2px}
+.chk{appearance:none; -webkit-appearance:none; width:26px; height:26px; flex:none; border-radius:9px; border:2px solid var(--a); background:transparent; cursor:pointer; position:relative; transition:.25s}
+.chk::after{content:""; position:absolute; left:7px; top:2px; width:6px; height:12px; border:solid #fff; border-width:0 3px 3px 0; transform:rotate(45deg) scale(0); transition:transform .25s cubic-bezier(.2,.9,.3,1.6)}
+.chk:checked{background:linear-gradient(135deg,var(--a),var(--b)); border-color:transparent}
+.chk:checked::after{transform:rotate(45deg) scale(1)}
+.chk.pop{animation:pop .4s}
+@keyframes pop{50%{transform:scale(1.3)}}
+.ib{width:38px; height:38px; border-radius:12px; display:grid; place-items:center; background:transparent; border:1.5px solid var(--line); color:var(--muted); transition:.2s}
+.ib svg{width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; transition:transform .25s}
+.ib.edit:hover{color:#fff; background:var(--a); border-color:var(--a); transform:translateY(-2px)}
+.ib.edit:hover svg{transform:rotate(-12deg) scale(1.15)}
+.ib.del:hover{color:#fff; background:var(--danger); border-color:var(--danger); transform:translateY(-2px)}
+.ib.del:hover svg{animation:shake .4s}
+.ib:active{transform:scale(.88)}
+@keyframes shake{25%{transform:rotate(-14deg)} 75%{transform:rotate(14deg)}}
+li input[type=text]{padding:7px 12px; border-radius:12px; box-shadow:none}
+.empty{text-align:center; color:var(--muted); padding:30px 0}
+.conf{position:fixed; width:9px; height:9px; border-radius:2px; z-index:9; pointer-events:none; animation:fall 1s ease-out forwards}
+@keyframes fall{to{transform:translate(var(--x),var(--y)) rotate(540deg); opacity:0}}
+:focus-visible{outline:3px solid var(--a); outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important; transition:none !important}}
